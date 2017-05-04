@@ -5,17 +5,31 @@ var numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
 
 var output ="";
 
-var userInput = prompt("Input a number");
+var translator = function(userInput) {
+  for (i = 0; i < numbers.length; i += 1) {
+
+    if (userInput >= numbers[i]) {
+      output += numerals[i];
+      userInput -= numbers[i];
+      i -= 1;
+    }
+  }
+
+  return output;
+
+};
 
 
- for (i = 0; i < numbers.length; i += 1) {
+$(document).ready(function() {
 
-   if (userInput >= numbers[i]) {
-     output += numerals[i];
-     userInput -= numbers[i];
-     i -= 1;
-   }
+  $("form").submit(function(event) {
+    event.preventDefault();
 
+    var userInput = $("#input").val();
 
-}
-alert(output);
+    var result = translator(userInput);
+
+    $(".output").text(result);
+
+  });
+});
